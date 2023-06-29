@@ -76,7 +76,7 @@ newgrp docker
 Установка - `sudo dpkg -i os-agent_1.5.1_linux_aarch64.deb`    
 
 :ballot_box_with_check: Установка Home Assisistant Supervised    
-Загружаем - `wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb`    
+Загружаем - `wget https://github.com/home-assistant/supervised-installer/releases/download/1.4.3/homeassistant-supervised.deb`    
 Установка - `sudo dpkg -i homeassistant-supervised.deb`    
 
 :arrow_right: Веб интерфейс Home Assistant - `http://IP adress:8123`    
