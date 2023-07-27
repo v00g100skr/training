@@ -1,6 +1,7 @@
 homeassistant:
   name: My Smart Home
   country: UA
+  currency: UAH
   latitude: !secret latitude_coord
   longitude: !secret longitude_coord
   elevation: 179
