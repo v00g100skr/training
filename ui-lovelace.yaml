@@ -97,7 +97,7 @@ views:
            - entity: sensor.maria_db_size
              name: Maria DB
                 
-  - !include lovelace/utility_meter.yaml
+  - !include lovelace/boiler.yaml
   
   
   

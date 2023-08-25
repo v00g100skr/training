@@ -34,7 +34,8 @@ lovelace:
      type: module                
    - url: /hacsfiles/lovelace-mushroom/mushroom.js
      type: module 
-     
+   - url: /hacsfiles/timer-bar-card/timer-bar-card.js
+     type: module     
      
 # Text to speech
 tts:
@@ -61,7 +62,7 @@ recorder: !include includes/recorder.yaml
 # yeelight: !include includes/yeelight.yaml
 light: !include includes/light.yaml
 fan: !include includes/fan.yaml
-air_quality: !include includes/air_quality.yaml
+# air_quality: !include includes/air_quality.yaml
 remote: !include includes/remote.yaml
 #mqtt_statestream: !include includes/mqtt_statestream.yaml
 
