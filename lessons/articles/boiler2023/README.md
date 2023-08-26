@@ -1,3 +1,19 @@
+### [Блог. Home Assistant - Local Calendar, обновление 2022 12](https://youtu.be/nLNq187Fcps)     
+
+<a href="https://www.youtube.com/channel/UCcq9onYHbs6go3kDpfBoqhg?sub_confirmation=1" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/subscribe.png" alt="Subscribe" style="height: 71px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+
+:ballot_box_with_check: Запись в configuration.yaml для пакаджей    
+
+```yaml
+homeassistant:
+  packages: !include_dir_merge_named includes/packages
+```    
+
+:ballot_box_with_check: Пакадж из обзора    
+
+```yaml
+
 boiler_2023:
 
 
@@ -748,12 +764,302 @@ boiler_2023:
              message: | 
                   {{"\U0001F916"}} Бойлер - выключение {{ states('sensor.time_date') }} 
 
+```    
+
+
+:ballot_box_with_check: Оформление в интерфейсе    
+
+```yaml
+    - type: vertical-stack
+      cards:
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+                - entity: sensor.custom_time
+                  name: Текущее время
+                - entity: switch.0x60a423fffe7ff8c8_mode
+
+                - entity: switch.0x60a423fffe7ff8c8
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Бойлер
+                  secondary_info: last-changed
+                  state_header: Питание
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_manual
+                    name: Таймер M
+                  - entity: sensor.0x60a423fffe7ff8c8_power
+                    name: Мощность
+                    unit: 'Ватт'
+
+
+            - type: conditional
+              conditions:
+                - entity: switch.0x60a423fffe7ff8c8
+                  state: "on"
+              card:
+                  type: custom:timer-bar-card
+                  entities:
+                  - entity: timer.0x60a423fffe7ff8c8
+                    name: Осталось - 
+                  modifications:
+                  - elapsed: 30%
+                    bar_foreground: yellow
+                  - elapsed: 60%
+                    bar_foreground: orange
+                  - elapsed: 90%
+                    bar_foreground: red
+                  bar_height: 20px
+                  sync_issues: ignore
+                  invert: true
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+                - entity: input_datetime.0x60a423fffe7ff8c8_period
+
+            - type: horizontal-stack
+        
+              cards:
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_period_1
+                  icon: mdi:numeric-1-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_period_1
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_period_2
+                  icon: mdi:numeric-2-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_period_2
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_period_3
+                  icon: mdi:numeric-3-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_period_3
+                      
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_period_4
+                  icon: mdi:numeric-4-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_period_4
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_period_5
+                  icon: mdi:numeric-5-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_period_5
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+                - entity: input_datetime.0x60a423fffe7ff8c8_timer
+
+            - type: horizontal-stack
+        
+              cards:
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_1
+                  icon: mdi:numeric-1-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_1
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_2
+                  icon: mdi:numeric-2-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_2
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_3
+                  icon: mdi:numeric-3-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_3
+                      
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_4
+                  icon: mdi:numeric-4-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_4
+
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_5
+                  icon: mdi:numeric-5-circle
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_5
+                      
+                - type: custom:mushroom-template-card
+                  layout: horizontal
+                  entity: input_button.0x60a423fffe7ff8c8_timer_manual
+                  icon: mdi:alpha-m-circle-outline
+                  multiline_secondary: true
+                  icon_color: grey
+                  tap_action:
+                    action: call-service
+                    service: input_button.press
+                    target:
+                      entity_id: input_button.0x60a423fffe7ff8c8_timer_manual
+
+    - type: vertical-stack
+      cards:
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
 
 
 
+            - type: entities
+              show_header_toggle: false
+              entities:
 
+                - entity: switch.0x60a423fffe7ff8c8_period_1_mode
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Период 1
+                  secondary_info: last-changed
+                  state_header: Активность
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_1
+                    name: Таймер
+                  - entity: sensor.0x60a423fffe7ff8c8_period_1
+                    name: Старт
+                    
+                - entity: switch.0x60a423fffe7ff8c8_period_2_mode
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Период 2
+                  secondary_info: last-changed
+                  state_header: Активность
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_2
+                    name: Таймер
+                  - entity: sensor.0x60a423fffe7ff8c8_period_2
+                    name: Старт
+                    
+                - entity: switch.0x60a423fffe7ff8c8_period_3_mode
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Период 3
+                  secondary_info: last-changed
+                  state_header: Активность
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_3
+                    name: Таймер
+                  - entity: sensor.0x60a423fffe7ff8c8_period_3
+                    name: Старт
+                    
+                - entity: switch.0x60a423fffe7ff8c8_period_4_mode
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Период 4
+                  secondary_info: last-changed
+                  state_header: Активность
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_4
+                    name: Таймер
+                  - entity: sensor.0x60a423fffe7ff8c8_period_4
+                    name: Старт
+                    
+                - entity: switch.0x60a423fffe7ff8c8_period_5_mode
+                  type: custom:multiple-entity-row
+                  toggle: true
+                  state_color: true
+                  name: Период 5
+                  secondary_info: last-changed
+                  state_header: Активность
+                  entities:
+                  - entity: sensor.0x60a423fffe7ff8c8_timer_5
+                    name: Таймер
+                  - entity: sensor.0x60a423fffe7ff8c8_period_5
+                    name: Старт
+```    
+____
+#### Поддержать развитие проекта *Умный дом с Alex Kvazis*    
+<a href="https://www.youtube.com/channel/UCcq9onYHbs6go3kDpfBoqhg/join" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/youtube.png" alt="Youtube Sponsorship" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+<a href="https://www.patreon.com/alex_kvazis" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/patreon-button.png" alt="Patreon Support" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+<a href="https://www.buymeacoffee.com/greatkvazis" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/buymeacoffee.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+<a href="https://www.paypal.com/paypalme/greatkvazis" target="_blank"><img src="https://raw.githubusercontent.com/kvazis/training/master/lessons/img/paypal.png" alt="PayPal Me" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
-
-
-
-
+#### Или перевод любой суммы на -     
+* Webmoney - Z243592584952
+* BTC - 1PAjXcNbLtUKLY8d5HDnfxRqc5Zchj1fU3    
+* TON - UQBEShkfKCFhvqlTs_oIpa6kFIQJguJR30hDXany1cCAbCfe    
+* USDT (TRON (TRC20)) - TEpnJcLDRbkwq5oQpjVET9NbPpHKB7QMrD    
