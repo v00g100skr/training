@@ -1,3 +1,9 @@
+#   - platform: ping
+#     name: router_ping
+#     unique_id: router_ping
+#     host: 192.168.0.1
+
+
 #   - platform: "mqtt"
 #     name: relay_interlock
 #     state_topic: "zigbee2mqtt/DA 2ch relay"
