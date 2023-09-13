@@ -14,7 +14,7 @@ const definition = {
     ],
     model: 'rtsc11r', 
     vendor: 'TuYa',
-    description: '5.8G human presence sensor',
+    description: '5.8G microvawe human presence sensor',
     configure: tuya.configureMagicPacket,
     fromZigbee: [tuya.fz.datapoints],
     toZigbee: [tuya.tz.datapoints],
